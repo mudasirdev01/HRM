@@ -1,0 +1,16 @@
+
+
+<div style="margin-bottom: 1rem; display: flex; justify-content: flex-end;">
+    <!-- This button triggers the popup to add a new employee -->
+    <p-button label="Add Employee" icon="pi pi-plus" (onClick)="openNew()"></p-button>
+</div>
+
+<app-generic-table 
+    title="Employee Directory" 
+    apiEndpoint="employees" 
+    [data]="employees" 
+    [columns]="employeeCols"
+    [showActions]="true"
+    (onEdit)="handleEdit($event)"
+    (dataChanged)="loadEmployees()">
+</app-generic-table>

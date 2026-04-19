@@ -1,0 +1,72 @@
+<div class="p-4">
+    <h2 style="margin-bottom: 2rem; color: #333;">HR Analytics Dashboard</h2>
+
+    <!-- Summary Cards -->
+    <div class="grid" style="display: flex; gap: 1rem; margin-bottom: 2rem;">
+        <div class="col" style="flex: 1;">
+            <p-card>
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <div>
+                        <span style="color: #6c757d; font-weight: bold; text-transform: uppercase;">Total
+                            Employees</span>
+                        <div style="font-size: 2rem; font-weight: bold; color: #2196F3;">{{ totalEmployees }}</div>
+                    </div>
+                    <i class="pi pi-users" style="font-size: 2.5rem; color: #2196F3;"></i>
+                </div>
+            </p-card>
+        </div>
+
+        <div class="col" style="flex: 1;">
+            <p-card>
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <div>
+                        <span style="color: #6c757d; font-weight: bold; text-transform: uppercase;">Departments</span>
+                        <div style="font-size: 2rem; font-weight: bold; color: #66BB6A;">{{ totalDepartments }}</div>
+                    </div>
+                    <i class="pi pi-building" style="font-size: 2.5rem; color: #66BB6A;"></i>
+                </div>
+            </p-card>
+        </div>
+
+        <div class="col" style="flex: 1;">
+            <p-card>
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <div>
+                        <span style="color: #6c757d; font-weight: bold; text-transform: uppercase;">Pending
+                            Leaves</span>
+                        <div style="font-size: 2rem; font-weight: bold; color: #FFA726;">{{ pendingLeaves }}</div>
+                    </div>
+                    <i class="pi pi-calendar-times" style="font-size: 2.5rem; color: #FFA726;"></i>
+                </div>
+            </p-card>
+        </div>
+    </div>
+
+    <!-- The Tabs Section -->
+    <p-card>
+        <p-tabView>
+
+            <!-- Tab 1: Employees -->
+            <p-tabPanel header="Employees Overview" leftIcon="pi pi-users">
+                <app-generic-table title="Employee Roster" [data]="employeesData" [columns]="employeeCols"
+                    [showActions]="false"> <!-- Actions are hidden on the dashboard! -->
+                </app-generic-table>
+            </p-tabPanel>
+
+            <!-- Tab 2: Departments -->
+            <p-tabPanel header="Departments Overview" leftIcon="pi pi-building">
+                <app-generic-table title="Company Departments" [data]="departmentsData" [columns]="departmentCols"
+                    [showActions]="false">
+                </app-generic-table>
+            </p-tabPanel>
+
+            <!-- Tab 3: Leaves -->
+            <p-tabPanel header="Leave Requests" leftIcon="pi pi-calendar">
+                <app-generic-table title="All Leave Requests" [data]="leavesData" [columns]="leaveCols"
+                    [showActions]="false">
+                </app-generic-table>
+            </p-tabPanel>
+
+        </p-tabView>
+    </p-card>
+</div>

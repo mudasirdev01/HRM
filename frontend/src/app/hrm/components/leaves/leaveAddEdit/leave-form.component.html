@@ -1,0 +1,34 @@
+<form [formGroup]="leaveForm" (ngSubmit)="save()" class="p-fluid">
+    
+    <div class="field" style="margin-bottom: 1rem;">
+        <label>Employee <span style="color:red">*</span></label>
+        <p-dropdown [options]="employees" formControlName="employee_id" optionLabel="first_name" optionValue="id" placeholder="Select Employee" [appendTo]="'body'"></p-dropdown>
+    </div>
+
+    <div class="p-formgrid grid" style="display: flex; gap: 1rem; margin-bottom: 1rem;">
+        <div class="field col" style="flex: 1;">
+            <label>Start Date <span style="color:red">*</span></label>
+            <p-calendar formControlName="start_date" [appendTo]="'body'" dateFormat="yy-mm-dd"></p-calendar>
+        </div>
+        <div class="field col" style="flex: 1;">
+            <label>End Date <span style="color:red">*</span></label>
+            <p-calendar formControlName="end_date" [appendTo]="'body'" dateFormat="yy-mm-dd"></p-calendar>
+        </div>
+    </div>
+
+    <div class="field" style="margin-bottom: 1rem;">
+        <label>Reason for Leave <span style="color:red">*</span></label>
+        <textarea pInputTextarea formControlName="reason" rows="3" placeholder="I am taking a family vacation..."></textarea>
+    </div>
+
+    <!-- Manager Only Section: Change Status -->
+    <div *ngIf="isEditMode" class="field" style="margin-bottom: 2rem;">
+        <label>Manager Approval Status</label>
+        <p-dropdown [options]="statusChoices" formControlName="status" [appendTo]="'body'"></p-dropdown>
+    </div>
+
+    <div style="display: flex; justify-content: flex-end; gap: 1rem; margin-top: 1rem;">
+        <p-button label="Cancel" icon="pi pi-times" styleClass="p-button-text p-button-secondary" (onClick)="cancel()"></p-button>
+        <p-button label="Submit Request" icon="pi pi-check" type="submit" [disabled]="leaveForm.invalid"></p-button>
+    </div>
+</form>

@@ -1,0 +1,47 @@
+<form [formGroup]="employeeForm" (ngSubmit)="save()" class="p-fluid">
+
+    <div class="p-formgrid grid" style="display: flex; gap: 1rem; margin-bottom: 1rem;">
+        <div class="field col" style="flex: 1;">
+            <label>First Name <span style="color:red">*</span></label>
+            <input pInputText formControlName="first_name" placeholder="John" />
+        </div>
+        <div class="field col" style="flex: 1;">
+            <label>Last Name <span style="color:red">*</span></label>
+            <input pInputText formControlName="last_name" placeholder="Doe" />
+        </div>
+    </div>
+
+    <div class="field" style="margin-bottom: 1rem;">
+        <label>Email Address <span style="color:red">*</span></label>
+        <input pInputText formControlName="email" type="email" placeholder="john@company.com" />
+    </div>
+
+    <div class="field" style="margin-bottom: 1rem;">
+        <label>Phone Number <span style="color:red">*</span></label>
+        <input pInputText formControlName="phone_number" placeholder="+1 234 567 8900" />
+    </div>
+
+    <div class="field" style="margin-bottom: 1rem;">
+        <label>Department</label>
+        <p-dropdown [options]="departments" formControlName="department_id" optionLabel="name" optionValue="id"
+            placeholder="Select a Department" [appendTo]="'body'"></p-dropdown>
+    </div>
+
+    <div style="display: flex; gap: 2rem; margin-bottom: 2rem;">
+        <div class="field-checkbox">
+            <p-checkbox formControlName="is_manager" [binary]="true" inputId="manager"></p-checkbox>
+            <label for="manager" style="margin-left: 0.5rem;">Is Manager</label>
+        </div>
+        <div class="field-checkbox">
+            <p-checkbox formControlName="is_active" [binary]="true" inputId="active"></p-checkbox>
+            <label for="active" style="margin-left: 0.5rem;">Is Active</label>
+        </div>
+    </div>
+
+    <!-- The Save and Cancel buttons -->
+    <div style="display: flex; justify-content: flex-end; gap: 1rem;">
+        <p-button label="Cancel" icon="pi pi-times" styleClass="p-button-text p-button-secondary"
+            (onClick)="cancel()"></p-button>
+        <p-button label="Save Employee" icon="pi pi-check" type="submit" [disabled]="employeeForm.invalid"></p-button>
+    </div>
+</form>

@@ -1,0 +1,67 @@
+<div class="card" style="padding: 2rem;">
+    <p-table #dt [value]="data" [columns]="columns" [paginator]="true" [rows]="10" 
+             [globalFilterFields]="globalFilterFields" 
+             [tableStyle]="{ 'min-width': '50rem' }" 
+             styleClass="p-datatable-gridlines p-datatable-striped">
+        
+        <ng-template pTemplate="caption">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+                <h2>{{ title }}</h2>
+                <span class="p-input-icon-left">
+                    <i class="pi pi-search"></i>
+                    <input pInputText type="text" (input)="dt.filterGlobal($any($event.target).value, 'contains')" placeholder="Global Search..." />
+                </span>
+            </div>
+        </ng-template>
+
+        <!-- Dynamic Headers -->
+        <ng-template pTemplate="header" let-columns>
+            <tr>
+                <!-- New S.No Header -->
+                <th style="width: 50px;">S.No</th>
+                
+                <th *ngFor="let col of columns" [pSortableColumn]="col.field">
+                    {{ col.header }} <p-sortIcon [field]="col.field"></p-sortIcon>
+                </th>
+                
+                <!-- Action Header -->
+                <th *ngIf="showActions" style="width: 150px; text-align: center;">Actions</th>
+            </tr>
+        </ng-template>
+
+        <!-- Dynamic Body with rowIndex -->
+        <ng-template pTemplate="body" let-rowData let-columns="columns" let-rowIndex="rowIndex">
+            <tr>
+                <!-- Automatically calculated Serial Number -->
+                <td>{{ rowIndex + 1 }}</td>
+                
+                <td *ngFor="let col of columns">
+                    <span *ngIf="!col.type || col.type === 'text'">
+                        {{ rowData[col.field] || '-' }}
+                    </span>
+                    <p-tag *ngIf="col.type === 'badge' && rowData[col.field]" severity="success" value="Yes"></p-tag>
+                    <p-tag *ngIf="col.type === 'badge' && !rowData[col.field]" severity="danger" value="No"></p-tag>
+                </td>
+
+                <!-- Action Buttons -->
+                <td *ngIf="showActions" style="text-align: center;">
+                    <p-button icon="pi pi-pencil" 
+                              styleClass="p-button-rounded p-button-text p-button-sm p-button-info" 
+                              (onClick)="editRow(rowData)">
+                    </p-button>
+                    <p-button icon="pi pi-trash" 
+                              styleClass="p-button-rounded p-button-text p-button-sm p-button-danger" 
+                              (onClick)="deleteRow(rowData)">
+                    </p-button>
+                </td>
+            </tr>
+        </ng-template>
+
+        <ng-template pTemplate="emptymessage">
+            <!-- Colspan dynamically increased by 2 for S.No and Actions -->
+            <tr>
+                <td [attr.colspan]="columns.length + (showActions ? 2 : 1)" style="text-align: center;">No data found.</td>
+            </tr>
+        </ng-template>
+    </p-table>
+</div>

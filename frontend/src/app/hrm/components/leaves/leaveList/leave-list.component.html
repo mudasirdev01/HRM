@@ -1,0 +1,13 @@
+<div style="margin-bottom: 1rem; display: flex; justify-content: flex-end;">
+    <p-button label="Request Leave" icon="pi pi-calendar-plus" (onClick)="openNew()"></p-button>
+</div>
+
+<app-generic-table 
+    title="Leave Requests" 
+    apiEndpoint="leave-requests" 
+    [data]="leaves" 
+    [columns]="leaveCols"
+    [showActions]="true"
+    (onEdit)="handleEdit($event)"
+    (dataChanged)="loadLeaves()">
+</app-generic-table>

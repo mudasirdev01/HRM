@@ -1,0 +1,16 @@
+
+<div style ="margin-bottom: 1rem; display: flex; justify-content: flex-end;">
+    <!-- This button triggers the popup to add a new department -->
+    <p-button label="Add Department" icon="pi pi-plus" (onClick)="openNew()"></p-button>
+</div>
+
+
+<app-generic-table 
+    title="Department Directory" 
+    apiEndpoint="departments" 
+    [data]="departments" 
+    [columns]="departmentCols"
+    [showActions]="true"
+    (onEdit)="handleEdit($event)"
+    (dataChanged)="loadDepartments()"> 
+</app-generic-table>    

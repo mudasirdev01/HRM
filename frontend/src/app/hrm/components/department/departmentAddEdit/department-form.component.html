@@ -1,0 +1,20 @@
+<form [formGroup]="departmentForm" (ngSubmit)="save()" class="p-fluid">
+
+    <div class="field" style="margin-bottom: 1rem;">
+        <label>Department Name <span style="color:red">*</span></label>
+        <input pInputText formControlName="name" placeholder="e.g. Human Resources" />
+    </div>
+
+    <div class="field" style="margin-bottom: 2rem;">
+        <label>Description</label>
+        <textarea pInputTextarea formControlName="description" rows="3"
+            placeholder="What does this department do?"></textarea>
+    </div>
+
+    <div style="display: flex; justify-content: flex-end; gap: 1rem;">
+        <p-button label="Cancel" icon="pi pi-times" styleClass="p-button-text p-button-secondary"
+            (onClick)="cancel()"></p-button>
+        <p-button label="Save Department" icon="pi pi-check" type="submit"
+            [disabled]="departmentForm.invalid"></p-button>
+    </div>
+</form>
